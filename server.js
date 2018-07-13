@@ -12,14 +12,18 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false}))
 
 //Angular DIST output folder
-app.use(express(path.join(__dirname, 'dist')))
+app.use(express.static(path.join(__dirname, 'dist')))
 
 // API location
-app.use('./api', api)
+app.use('/api', api)
 
 // Send all other requests to the Angular app
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './dist/mean/index.html'))
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../dist', 'index.html'))
+// })
+
+app.get('/', function(req, res) {
+  res.send("Hello")
 })
 
 // Set Port
